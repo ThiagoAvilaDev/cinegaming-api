@@ -1,5 +1,7 @@
 package br.com.thiago.cinegamingapi.domain.filme;
 
+import br.com.thiago.cinegamingapi.infra.exceptions.RegrasDeNegocioException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +36,12 @@ public class FilmeService {
 
     @Transactional
     public DadosListagemFilme atualizaDados(Long id, DadosAtualizaFilme dados) {
-        var filme = filmeRepository.getReferenceById(id);
+        var filme = filmeRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Id informado não existe.")
+        );
+        if (!filme.getAtivo()){
+            throw new RegrasDeNegocioException("A entidade informada não pode ser modificada.");
+        }
         filme.atualizaDados(dados);
 
         return new DadosListagemFilme(filme);
@@ -42,7 +49,9 @@ public class FilmeService {
 
     @Transactional
     public void excluir(Long id) {
-      var filme = filmeRepository.getReferenceById(id);
+      var filme = filmeRepository.findById(id).orElseThrow(
+              () -> new EntityNotFoundException("Id informado não existe.")
+      );
       filme.desativar();
 
     }
