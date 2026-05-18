@@ -13,7 +13,7 @@ public class Filme {
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
     private String descricao;
-    private boolean ativo;
+    private Boolean ativo;
 
 
     public Filme(){}
@@ -41,6 +41,9 @@ public class Filme {
         return descricao;
     }
 
+    public Boolean getAtivo() {
+        return ativo;
+    }
 
     public void atualizaDados(DadosAtualizaFilme dados) {
         if (dados.titulo() != null){

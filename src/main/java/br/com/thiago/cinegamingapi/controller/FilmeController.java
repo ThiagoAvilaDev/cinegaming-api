@@ -1,6 +1,7 @@
 package br.com.thiago.cinegamingapi.controller;
 
 import br.com.thiago.cinegamingapi.domain.filme.*;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -20,7 +21,7 @@ public class FilmeController {
     }
 
     @PostMapping
-    public ResponseEntity<DadosListagemFilme> adicionarFilme(@RequestBody  DadosCadastroFilme dados, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity<DadosListagemFilme> adicionarFilme(@Valid @RequestBody  DadosCadastroFilme dados, UriComponentsBuilder uriComponentsBuilder){
         var filme = filmeService.adicionarFilme(dados);
         var uri = uriComponentsBuilder.path("/filme/{id}").buildAndExpand(filme.id()).toUri();
 
