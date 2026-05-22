@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.assertj.MockMvcTester;
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+
 @WebMvcTest(FilmeController.class)
 @AutoConfigureJsonTesters
 class FilmeControllerTest {
@@ -84,6 +84,23 @@ class FilmeControllerTest {
         assertThat(this.mvcTester.delete()
                 .uri("/filme/{id}",idExistente))
                 .hasStatus(HttpStatus.NO_CONTENT);
+    }
+
+    @Test
+    @DisplayName("Deve garantir o retorno correto ao reativar a entidade Filme")
+    void garantirReativacaoCorreta() {
+        Long idExistente = 1L;
+        var dadosDetalhamento = new DadosListagemFilme(idExistente,"TituloTest",Categoria.ACAO,"DescricaoTest");
+
+        Mockito.when(filmeService.reativar(idExistente)).thenReturn(dadosDetalhamento);
+
+
+        assertThat(this.mvcTester.patch()
+                .uri("/filme/reativar/{id}",idExistente))
+                .hasStatus(HttpStatus.OK)
+                .bodyJson()
+                .convertTo(DadosListagemFilme.class)
+                .isEqualTo(dadosDetalhamento);
     }
 
 }

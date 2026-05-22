@@ -52,7 +52,7 @@ public class FilmeController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<DadosListagemFilme> atualizarDados(@PathVariable Long id, @RequestBody  DadosAtualizaFilme dados){
-       return ResponseEntity.ok( filmeService.atualizaDados(id,dados));
+        return ResponseEntity.ok( filmeService.atualizaDados(id,dados));
 
     }
 
@@ -62,6 +62,11 @@ public class FilmeController {
         return ResponseEntity.noContent().build();
     }
 
+    @PatchMapping("/reativar/{id}")
+    public ResponseEntity<DadosListagemFilme> reativar(@PathVariable Long id){
+        var filme = filmeService.reativar(id);
+        return ResponseEntity.ok(filme);
+    }
 
 
 
