@@ -25,7 +25,7 @@ public class FilmeService {
     }
 
     public Page<DadosListagemFilme> listarFilmes(Pageable pageable) {
-       return filmeRepository.findAllByAtivoTrue(pageable).map(DadosListagemFilme::new);
+        return filmeRepository.findAllByAtivoTrue(pageable).map(DadosListagemFilme::new);
     }
 
     public Page<DadosListagemFilme> listarFilmesPorCategoria(Categoria categoria,Pageable pageable) {
@@ -49,15 +49,31 @@ public class FilmeService {
 
     @Transactional
     public void excluir(Long id) {
-      var filme = filmeRepository.findById(id).orElseThrow(
-              () -> new EntityNotFoundException("Id informado não existe.")
-      );
-      filme.desativar();
+        var filme = filmeRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Id informado não existe.")
+        );
+        if(!filme.getAtivo()){
+            throw new RegrasDeNegocioException("Este Filme já está desativado.");
+        }
+        filme.desativar();
 
     }
 
     public Page<DadosListagemFilme> buscaPorTitulo(String titulo,Pageable pageable) {
         var filme = filmeRepository.findByTituloContainingIgnoreCaseAndAtivoTrue(titulo,pageable);
-      return filme.map(DadosListagemFilme::new);
+        return filme.map(DadosListagemFilme::new);
+    }
+
+    @Transactional
+    public DadosListagemFilme reativar(Long id) {
+        var filme = filmeRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Id informado não existe.")
+        );
+        if (filme.getAtivo()){
+            throw new RegrasDeNegocioException("Este filme já está ativo.");
+        }
+        filme.reativar();
+
+        return new DadosListagemFilme(filme);
     }
 }

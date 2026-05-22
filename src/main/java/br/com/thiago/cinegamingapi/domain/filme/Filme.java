@@ -46,18 +46,21 @@ public class Filme {
     }
 
     public void atualizaDados(DadosAtualizaFilme dados) {
-        if (dados.titulo() != null){
+        if (dados.titulo() != null && !dados.titulo().isBlank()){
             this.titulo = dados.titulo();
         }
         if (dados.categoria() != null) {
             this.categoria = dados.categoria();
         }
-        if (dados.descricao() != null) {
+        if (dados.descricao() != null  && !dados.descricao().isBlank()) {
             this.descricao = dados.descricao();
         }
     }
 
     public void desativar() {
         this.ativo = false;
+    }
+
+    public void reativar() {this.ativo = true;
     }
 }
