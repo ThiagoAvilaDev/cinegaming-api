@@ -55,6 +55,9 @@ public class JogoService {
        var jogo =  jogoRepository.findById(id).orElseThrow(
                 () -> new RegrasDeNegocioException("O Id informado não existe")
         );
+       if (!jogo.getAtivo()){
+           throw new RegrasDeNegocioException("Este Jogo já está desativado.");
+       }
        jogo.deletar();
     }
 
