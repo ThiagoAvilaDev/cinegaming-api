@@ -52,13 +52,26 @@ class JogoServiceTest {
     @Test
     @DisplayName("Exclusão Lógica deve tornar ativo em false")
     void garantirExclusaoLogica(){
-        Long idexistente = 1L;
+        Long idExistente = 1L;
         var jogo = criarJogoAuxiliar();
 
-        Mockito.when(jogoRepository.findById(idexistente)).thenReturn(Optional.of(jogo));
-        jogoService.desativar(idexistente);
+        Mockito.when(jogoRepository.findById(idExistente)).thenReturn(Optional.of(jogo));
+        jogoService.desativar(idExistente);
 
         Assertions.assertFalse(jogo.getAtivo());
+    }
+
+    @Test
+    @DisplayName("Deve lançar Exceção ao tentar Desativar jogo já desativo.")
+    void deveLancarExcecaoJogoDesativado(){
+        Long idExistente = 1L;
+        var jogo = criarJogoAuxiliar();
+
+        Mockito.when(jogoRepository.findById(idExistente)).thenReturn(Optional.of(jogo));
+        jogo.deletar();
+
+        var exception = Assertions.assertThrows(RegrasDeNegocioException.class, () -> jogoService.desativar(idExistente));
+            Assertions.assertEquals("Este Jogo já está desativado.",exception.getMessage());
     }
 
     @Test
@@ -77,13 +90,13 @@ class JogoServiceTest {
     @Test
     @DisplayName("Deve lançar uma exceção ao tentar ativar jogo já ativo")
     void deveLancarExcecaoJogoAtivo(){
-        Long idexistente = 1L;
+        Long idExistente = 1L;
         var jogo = criarJogoAuxiliar();
 
-        Mockito.when(jogoRepository.findById(idexistente)).thenReturn(Optional.of(jogo));
+        Mockito.when(jogoRepository.findById(idExistente)).thenReturn(Optional.of(jogo));
 
 
-        var exception = Assertions.assertThrows(RegrasDeNegocioException.class,() -> jogoService.reativar(idexistente));
+        var exception = Assertions.assertThrows(RegrasDeNegocioException.class,() -> jogoService.reativar(idExistente));
         Assertions.assertEquals("Este Jogo já está ativo.",exception.getMessage());
     }
 
