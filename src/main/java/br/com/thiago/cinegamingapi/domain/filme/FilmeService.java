@@ -29,7 +29,7 @@ public class FilmeService {
     }
 
     public Page<DadosListagemFilme> listarFilmesPorCategoria(Categoria categoria,Pageable pageable) {
-        return filmeRepository.findByCategoria(categoria,pageable).map(DadosListagemFilme::new);
+        return filmeRepository.findAllByCategoriaAndAtivoTrue(categoria,pageable).map(DadosListagemFilme::new);
 
     }
 

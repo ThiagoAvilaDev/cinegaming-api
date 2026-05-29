@@ -50,7 +50,7 @@ class RandomizerServiceTest {
         List<Filme> listaFilmeFicticios = List.of(filme1,filme2);
         var filmeRetorno = new DadosListagemFilme(filme2.getId(),filme2.getTitulo(),filme2.getCategoria(),filme2.getDescricao());
 
-        Mockito.when(filmeRepository.findByCategoriaAndAtivoTrue(Categoria.ACAO)).thenReturn(listaFilmeFicticios);
+        Mockito.when(filmeRepository.findAllByCategoriaAndAtivoTrue(Categoria.ACAO)).thenReturn(listaFilmeFicticios);
         try (var mockSorteador =  Mockito.mockStatic(Sorteador.class)){
             mockSorteador.when(() -> Sorteador.sorteador(listaFilmeFicticios.size())).thenReturn(1);
             var resultado = randomizerService.buscarFilmeAleatorioPorCategoria(Categoria.ACAO);

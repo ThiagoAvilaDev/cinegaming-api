@@ -31,7 +31,7 @@ public class RandomizerService {
     }
 
     public DadosListagemFilme buscarFilmeAleatorioPorCategoria(Categoria categoria){
-        var listFilms = filmeRepository.findByCategoriaAndAtivoTrue(categoria);
+        var listFilms = filmeRepository.findAllByCategoriaAndAtivoTrue(categoria);
         var position = sorteador(listFilms.size());
         return new DadosListagemFilme(listFilms.get(position));
     }
