@@ -27,8 +27,8 @@ class RandomizerServiceTest {
     @Test
     @DisplayName("Deve Garantir que Retorne um Filme aleatório")
     void garantirFilmeAleatorio(){
-        var filme1 = new Filme(new DadosCadastroFilme("TituloTest1","DescTest1",Categoria.ACAO));
-        var filme2 =  new Filme(new DadosCadastroFilme("TituloTest2","DescTest2",Categoria.ACAO));
+        var filme1 = new Filme(new DadosCadastroFilme("TituloTest1","DescTest1", CategoriaFilme.ACAO));
+        var filme2 =  new Filme(new DadosCadastroFilme("TituloTest2","DescTest2", CategoriaFilme.ACAO));
         List<Filme> listaFilmeFicticios = List.of(filme1,filme2);
         var filmeRetorno = new DadosListagemFilme(filme2.getId(),filme2.getTitulo(),filme2.getCategoria(),filme2.getDescricao());
 
@@ -45,15 +45,15 @@ class RandomizerServiceTest {
     @Test
     @DisplayName("Deve Garantir que Retorne um Filme aleatório da categoria Escolhida")
     void garantirFilmeAleatorioCategoria(){
-        var filme1 = new Filme(new DadosCadastroFilme("TituloTest1","DescTest1",Categoria.ACAO));
-        var filme2 =  new Filme(new DadosCadastroFilme("TituloTest2","DescTest2",Categoria.ACAO));
+        var filme1 = new Filme(new DadosCadastroFilme("TituloTest1","DescTest1", CategoriaFilme.ACAO));
+        var filme2 =  new Filme(new DadosCadastroFilme("TituloTest2","DescTest2", CategoriaFilme.ACAO));
         List<Filme> listaFilmeFicticios = List.of(filme1,filme2);
         var filmeRetorno = new DadosListagemFilme(filme2.getId(),filme2.getTitulo(),filme2.getCategoria(),filme2.getDescricao());
 
-        Mockito.when(filmeRepository.findAllByCategoriaAndAtivoTrue(Categoria.ACAO)).thenReturn(listaFilmeFicticios);
+        Mockito.when(filmeRepository.findAllByCategoriaAndAtivoTrue(CategoriaFilme.ACAO)).thenReturn(listaFilmeFicticios);
         try (var mockSorteador =  Mockito.mockStatic(Sorteador.class)){
             mockSorteador.when(() -> Sorteador.sorteador(listaFilmeFicticios.size())).thenReturn(1);
-            var resultado = randomizerService.buscarFilmeAleatorioPorCategoria(Categoria.ACAO);
+            var resultado = randomizerService.buscarFilmeAleatorioPorCategoria(CategoriaFilme.ACAO);
             Assertions.assertEquals(filmeRetorno, resultado);
         }
 

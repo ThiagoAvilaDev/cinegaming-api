@@ -1,6 +1,6 @@
 package br.com.thiago.cinegamingapi.controller;
 
-import br.com.thiago.cinegamingapi.domain.filme.Categoria;
+import br.com.thiago.cinegamingapi.domain.filme.CategoriaFilme;
 import br.com.thiago.cinegamingapi.domain.filme.DadosListagemFilme;
 import br.com.thiago.cinegamingapi.domain.jogo.CategoriaJogo;
 import br.com.thiago.cinegamingapi.domain.jogo.DadosListagemJogo;
@@ -29,7 +29,7 @@ class RandomizerControllerTest {
     @Test
     @DisplayName("Deve garantir retornar o código 200 e o DTO para Filme aleatório")
     void garantirCodigo200DTOFilme(){
-        var dadoDetalhamentoFilme = new DadosListagemFilme(1L,"TitutoTest1", Categoria.ACAO,"DescTest1");
+        var dadoDetalhamentoFilme = new DadosListagemFilme(1L,"TitutoTest1", CategoriaFilme.ACAO,"DescTest1");
 
         Mockito.when(randomizerService.buscarFilmeAleatorio()).thenReturn(dadoDetalhamentoFilme);
 
@@ -43,8 +43,8 @@ class RandomizerControllerTest {
     @Test
     @DisplayName("Deve garantir retornar o código 200 e o DTO para Filme aleatório de Categoria")
     void garantirCodigo200DTOFilmeCategoria(){
-        var dadoDetalhamentoFilme = new DadosListagemFilme(1L,"TitutoTest1", Categoria.ACAO,"DescTest1");
-        var categoria = Categoria.ACAO;
+        var dadoDetalhamentoFilme = new DadosListagemFilme(1L,"TitutoTest1", CategoriaFilme.ACAO,"DescTest1");
+        var categoria = CategoriaFilme.ACAO;
         Mockito.when(randomizerService.buscarFilmeAleatorioPorCategoria(categoria)).thenReturn(dadoDetalhamentoFilme);
 
         assertThat(this.mvc.get()

@@ -37,7 +37,7 @@ public class FilmeController {
 
 
     @GetMapping("/categoria/{categoria}")
-    public ResponseEntity<Page<DadosListagemFilme>> listarPorCategoria(@PathVariable Categoria  categoria,@PageableDefault(sort = "titulo") Pageable pageable){
+    public ResponseEntity<Page<DadosListagemFilme>> listarPorCategoria(@PathVariable CategoriaFilme categoria, @PageableDefault(sort = "titulo") Pageable pageable){
         var filmes = filmeService.listarFilmesPorCategoria(categoria,pageable);
         return ResponseEntity.ok(filmes);
     }

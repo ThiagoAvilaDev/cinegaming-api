@@ -1,6 +1,6 @@
 package br.com.thiago.cinegamingapi.controller;
 
-import br.com.thiago.cinegamingapi.domain.filme.Categoria;
+import br.com.thiago.cinegamingapi.domain.filme.CategoriaFilme;
 import br.com.thiago.cinegamingapi.domain.filme.DadosListagemFilme;
 import br.com.thiago.cinegamingapi.domain.jogo.CategoriaJogo;
 import br.com.thiago.cinegamingapi.domain.jogo.DadosListagemJogo;
@@ -30,7 +30,7 @@ public class RandomizerController {
     }
 
     @GetMapping("/filmes/categoria/{categoria}")
-    public ResponseEntity<DadosListagemFilme> buscarFilmeAleatorioPorCategoria(@PathVariable Categoria categoria){
+    public ResponseEntity<DadosListagemFilme> buscarFilmeAleatorioPorCategoria(@PathVariable CategoriaFilme categoria){
         return ResponseEntity.ok(randomizerService.buscarFilmeAleatorioPorCategoria(categoria));
     }
 

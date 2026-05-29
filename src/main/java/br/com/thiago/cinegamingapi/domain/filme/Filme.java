@@ -11,7 +11,7 @@ public class Filme {
     private Long id;
     private String titulo;
     @Enumerated(EnumType.STRING)
-    private Categoria categoria;
+    private CategoriaFilme categoria;
     private String descricao;
     private Boolean ativo;
 
@@ -33,7 +33,7 @@ public class Filme {
         return titulo;
     }
 
-    public Categoria getCategoria() {
+    public CategoriaFilme getCategoria() {
         return categoria;
     }
 

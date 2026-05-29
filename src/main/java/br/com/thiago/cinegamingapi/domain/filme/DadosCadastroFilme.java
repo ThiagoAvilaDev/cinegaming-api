@@ -6,5 +6,5 @@ import jakarta.validation.constraints.NotNull;
 public record DadosCadastroFilme(
         @NotBlank(message = "O campo Título não pode estar vazio.") String titulo,
         @NotBlank(message = "Insira uma descrição") String descricao,
-        @NotNull Categoria categoria) {
+        @NotNull CategoriaFilme categoria) {
 }
