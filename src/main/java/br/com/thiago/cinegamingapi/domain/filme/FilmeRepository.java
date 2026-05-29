@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface FilmeRepository extends JpaRepository<Filme, Long> {
 
-    Page<Filme> findByCategoria(Categoria categoria,Pageable pageable);
+    Page<Filme> findAllByCategoriaAndAtivoTrue(Categoria categoria, Pageable pageable);
 
     Page<Filme> findAllByAtivoTrue(Pageable pageable);
 
@@ -16,5 +16,5 @@ public interface FilmeRepository extends JpaRepository<Filme, Long> {
 
     List<Filme> findAllByAtivoTrue();
 
-    List<Filme> findByCategoriaAndAtivoTrue(Categoria categoria);
+    List<Filme> findAllByCategoriaAndAtivoTrue(Categoria categoria);
 }
