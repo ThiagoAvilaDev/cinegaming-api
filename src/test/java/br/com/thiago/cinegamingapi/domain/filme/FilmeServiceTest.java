@@ -27,7 +27,7 @@ class FilmeServiceTest {
         //Arrange
         Long idExistente = 1L;
         var filme = criarFilmeAuxiliar();
-        var dados = new DadosAtualizaFilme("TituloTest","DescTest",Categoria.ACAO);
+        var dados = new DadosAtualizaFilme("TituloTest","DescTest", CategoriaFilme.ACAO);
 
         filme.desativar();
         //Act
@@ -43,7 +43,7 @@ class FilmeServiceTest {
     void cenario2(){
         //Arrange
         Long idInexistente = 2L;
-        var dados = new DadosAtualizaFilme("TituloTest","DescTest",Categoria.ACAO);
+        var dados = new DadosAtualizaFilme("TituloTest","DescTest", CategoriaFilme.ACAO);
 
         //Act + Assert
         var exception = Assertions.assertThrows(EntityNotFoundException.class,() -> filmeService.atualizaDados(idInexistente,dados));
@@ -68,7 +68,7 @@ class FilmeServiceTest {
 
 
     private Filme criarFilmeAuxiliar(){
-        var dadosCadastro = new DadosCadastroFilme("Filme Test","Desc Test",Categoria.ACAO);
+        var dadosCadastro = new DadosCadastroFilme("Filme Test","Desc Test", CategoriaFilme.ACAO);
         return new Filme(dadosCadastro);
     }
 

@@ -36,8 +36,8 @@ class FilmeControllerTest {
     @Test
     @DisplayName("Garantir o Retorno e cadastro correto da entidade Filme")
     void garantirCadastroEntidadeFilme() throws IOException {
-        var dadosCadastro = new DadosCadastroFilme("TituloCadastro","DescricaoCadastro", Categoria.ACAO);
-        var dadosDetalhamento = new DadosListagemFilme(1L,"TituloCadastro",Categoria.ACAO,"DescricaoCadastro");
+        var dadosCadastro = new DadosCadastroFilme("TituloCadastro","DescricaoCadastro", CategoriaFilme.ACAO);
+        var dadosDetalhamento = new DadosListagemFilme(1L,"TituloCadastro", CategoriaFilme.ACAO,"DescricaoCadastro");
 
 
         Mockito.when(filmeService.adicionarFilme(dadosCadastro)).thenReturn(dadosDetalhamento);
@@ -58,8 +58,8 @@ class FilmeControllerTest {
     @DisplayName("Deve garantir a atualização correta da entidade Filme")
     void garantirAtualizacaoCorretaEntidadeFilme() throws IOException {
         Long idExistente = 1L;
-        var dadosAtualiza = new DadosAtualizaFilme("TituloAtualiza","DescricaoAtualiza",Categoria.ACAO);
-        var dadosDetalhamento = new DadosListagemFilme(idExistente,"TituloAtualiza",Categoria.ACAO,"DescricaoAtualiza");
+        var dadosAtualiza = new DadosAtualizaFilme("TituloAtualiza","DescricaoAtualiza", CategoriaFilme.ACAO);
+        var dadosDetalhamento = new DadosListagemFilme(idExistente,"TituloAtualiza", CategoriaFilme.ACAO,"DescricaoAtualiza");
 
 
         Mockito.when(filmeService.atualizaDados(idExistente,dadosAtualiza)).thenReturn(dadosDetalhamento);
@@ -90,7 +90,7 @@ class FilmeControllerTest {
     @DisplayName("Deve garantir o retorno correto ao reativar a entidade Filme")
     void garantirReativacaoCorreta() {
         Long idExistente = 1L;
-        var dadosDetalhamento = new DadosListagemFilme(idExistente,"TituloTest",Categoria.ACAO,"DescricaoTest");
+        var dadosDetalhamento = new DadosListagemFilme(idExistente,"TituloTest", CategoriaFilme.ACAO,"DescricaoTest");
 
         Mockito.when(filmeService.reativar(idExistente)).thenReturn(dadosDetalhamento);
 

@@ -1,6 +1,6 @@
 package br.com.thiago.cinegamingapi.domain.randomizador;
 
-import br.com.thiago.cinegamingapi.domain.filme.Categoria;
+import br.com.thiago.cinegamingapi.domain.filme.CategoriaFilme;
 import br.com.thiago.cinegamingapi.domain.filme.DadosListagemFilme;
 import br.com.thiago.cinegamingapi.domain.filme.FilmeRepository;
 import br.com.thiago.cinegamingapi.domain.jogo.CategoriaJogo;
@@ -30,7 +30,7 @@ public class RandomizerService {
         return new DadosListagemFilme(listFilms.get(position));
     }
 
-    public DadosListagemFilme buscarFilmeAleatorioPorCategoria(Categoria categoria){
+    public DadosListagemFilme buscarFilmeAleatorioPorCategoria(CategoriaFilme categoria){
         var listFilms = filmeRepository.findAllByCategoriaAndAtivoTrue(categoria);
         var position = sorteador(listFilms.size());
         return new DadosListagemFilme(listFilms.get(position));

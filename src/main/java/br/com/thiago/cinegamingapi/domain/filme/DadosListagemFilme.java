@@ -2,7 +2,7 @@ package br.com.thiago.cinegamingapi.domain.filme;
 
 public record DadosListagemFilme(Long id,
                                  String titulo,
-                                 Categoria categoria,
+                                 CategoriaFilme categoria,
                                  String descricao)
 {
 
