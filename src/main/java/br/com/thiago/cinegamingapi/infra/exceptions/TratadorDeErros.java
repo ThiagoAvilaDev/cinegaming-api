@@ -1,9 +1,11 @@
 package br.com.thiago.cinegamingapi.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -54,9 +56,20 @@ public class TratadorDeErros {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new DadoErrorMensagem(exception.getMessage()));
     }
 
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<DadoErrorMensagem> tratarErrorCredentials(BadCredentialsException exception){
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(new DadoErrorMensagem(exception.getMessage()));
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<DadoErrorMensagem> tratarErroEMailExistente(){
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new DadoErrorMensagem("Email Já Cadastrado."));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<DadoErrorMensagem> tratarErro500(Exception ex) {
-        ex.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new DadoErrorMensagem("Erro interno no servidor. Tente novamente mais tarde."));
     }
