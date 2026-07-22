@@ -1,5 +1,7 @@
 package br.com.thiago.cinegamingapi.domain.jogo;
 
+import br.com.thiago.cinegamingapi.domain.jogo.dto.DadosAtualizaJogo;
+import br.com.thiago.cinegamingapi.domain.jogo.dto.DadosCadastroJogo;
 import jakarta.persistence.*;
 
 @Entity(name = "jogo")

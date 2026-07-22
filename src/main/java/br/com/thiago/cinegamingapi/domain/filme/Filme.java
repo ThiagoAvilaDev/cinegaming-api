@@ -1,5 +1,7 @@
 package br.com.thiago.cinegamingapi.domain.filme;
 
+import br.com.thiago.cinegamingapi.domain.filme.dto.DadosAtualizaFilme;
+import br.com.thiago.cinegamingapi.domain.filme.dto.DadosCadastroFilme;
 import jakarta.persistence.*;
 
 @Entity(name = "filme")
@@ -19,10 +21,10 @@ public class Filme {
     public Filme(){}
 
     public Filme(DadosCadastroFilme dados) {
-      this.titulo = dados.titulo();
-      this.categoria = dados.categoria();
-      this.descricao = dados.descricao();
-      this.ativo = true;
+        this.titulo = dados.titulo();
+        this.categoria = dados.categoria();
+        this.descricao = dados.descricao();
+        this.ativo = true;
     }
 
     public Long getId() {
