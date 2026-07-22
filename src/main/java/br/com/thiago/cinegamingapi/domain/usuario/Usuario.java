@@ -1,5 +1,8 @@
 package br.com.thiago.cinegamingapi.domain.usuario;
 
+import br.com.thiago.cinegamingapi.domain.usuario.dto.DadosAtualizaEmailUsuario;
+import br.com.thiago.cinegamingapi.domain.usuario.dto.DadosAtualizaNomeUsuario;
+import br.com.thiago.cinegamingapi.domain.usuario.dto.DadosCadastroUsuario;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

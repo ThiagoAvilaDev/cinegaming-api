@@ -2,6 +2,8 @@ package br.com.thiago.cinegamingapi.infra.seguranca.autenticacao;
 
 import br.com.thiago.cinegamingapi.domain.usuario.Usuario;
 import br.com.thiago.cinegamingapi.domain.usuario.UsuarioRepository;
+import br.com.thiago.cinegamingapi.infra.seguranca.autenticacao.dto.DadosLogin;
+import br.com.thiago.cinegamingapi.infra.seguranca.autenticacao.dto.DadosToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
