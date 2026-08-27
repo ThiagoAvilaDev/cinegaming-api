@@ -5,14 +5,16 @@ import br.com.thiago.cinegamingapi.domain.jogo.dto.DadosAtualizaJogo;
 import br.com.thiago.cinegamingapi.domain.jogo.dto.DadosCadastroJogo;
 import br.com.thiago.cinegamingapi.domain.jogo.dto.DadosListagemJogo;
 import br.com.thiago.cinegamingapi.domain.jogo.usecase.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
+@Tag(name = "Jogos",description = "Endpoints para gerenciamento de jogos.")
 @RestController
 @RequestMapping("/jogo")
 public class JogoController {
@@ -39,19 +41,19 @@ public class JogoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DadosListagemJogo>> listar(@PageableDefault(size = 20,sort = "titulo") Pageable page){
+    public ResponseEntity<Page<DadosListagemJogo>> listar(@ParameterObject @PageableDefault(size = 20,sort = "titulo") Pageable page){
         var listJogo = consultarJogoUseCase.listar(page);
         return ResponseEntity.ok(listJogo);
     }
 
     @GetMapping("/categoria/{categoria}")
-    public ResponseEntity<Page<DadosListagemJogo>> buscarPorCategoria(@PathVariable CategoriaJogo categoria, @PageableDefault(size = 20,sort = "titulo") Pageable page){
+    public ResponseEntity<Page<DadosListagemJogo>> buscarPorCategoria(@PathVariable CategoriaJogo categoria,@ParameterObject @PageableDefault(size = 20,sort = "titulo") Pageable page){
         var listJogo = consultarJogoUseCase.listarPorCategoria(categoria,page);
         return ResponseEntity.ok(listJogo);
     }
 
     @GetMapping("/titulo/{titulo}")
-    public ResponseEntity<Page<DadosListagemJogo>> buscarPorTitulo(@PathVariable String titulo, @PageableDefault(size = 20,sort = "titulo") Pageable page){
+    public ResponseEntity<Page<DadosListagemJogo>> buscarPorTitulo(@PathVariable String titulo,@ParameterObject @PageableDefault(size = 20,sort = "titulo") Pageable page){
         var listJogo = consultarJogoUseCase.listarPorTitulo(titulo,page);
         return ResponseEntity.ok(listJogo);
     }
