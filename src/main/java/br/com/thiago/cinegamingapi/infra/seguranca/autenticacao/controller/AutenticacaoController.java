@@ -4,13 +4,16 @@ import br.com.thiago.cinegamingapi.infra.seguranca.autenticacao.AutenticacaoServ
 import br.com.thiago.cinegamingapi.infra.seguranca.autenticacao.dto.DadosLogin;
 import br.com.thiago.cinegamingapi.infra.seguranca.autenticacao.dto.DadosRefreshToken;
 import br.com.thiago.cinegamingapi.infra.seguranca.autenticacao.dto.DadosToken;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
+@Tag(name = "Autenticador",description = "Endpoints para validar usuários.")
 @RestController
+@SecurityRequirements
 public class AutenticacaoController {
 
     private final AutenticacaoService autenticacaoService;

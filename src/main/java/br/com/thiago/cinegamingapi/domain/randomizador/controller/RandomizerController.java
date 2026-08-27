@@ -6,12 +6,13 @@ import br.com.thiago.cinegamingapi.domain.jogo.CategoriaJogo;
 import br.com.thiago.cinegamingapi.domain.jogo.dto.DadosListagemJogo;
 import br.com.thiago.cinegamingapi.domain.randomizador.usecase.RandomizerFilmeUseCase;
 import br.com.thiago.cinegamingapi.domain.randomizador.usecase.RandomizerJogoUseCase;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+@Tag(name = "Randomizador",description = "Endpoints para buscas aleatórias de filme ou jogos.")
 @RestController
 @RequestMapping("/random")
 public class RandomizerController {

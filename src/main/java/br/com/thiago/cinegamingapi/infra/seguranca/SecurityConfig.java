@@ -33,7 +33,8 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(req ->
                         {
-                            req.requestMatchers(HttpMethod.POST,"/usuario","/login","/atualizar-token").permitAll();
+                            req.requestMatchers(HttpMethod.POST, "/usuario", "/login", "/atualizar-token").permitAll();
+                            req.requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll();
                             req.anyRequest().authenticated();
                         }
                 )

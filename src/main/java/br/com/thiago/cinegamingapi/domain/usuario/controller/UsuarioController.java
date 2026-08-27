@@ -2,7 +2,9 @@ package br.com.thiago.cinegamingapi.domain.usuario.controller;
 
 import br.com.thiago.cinegamingapi.domain.usuario.dto.*;
 import br.com.thiago.cinegamingapi.domain.usuario.usecase.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -13,7 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 import static org.springframework.data.domain.Sort.Direction.DESC;
-
+@Tag(name = "Usuários",description = "Endpoints para gerenciamento de usuários.")
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -49,7 +51,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DadosListagemUsuario>> listar(@PageableDefault(size = 20,sort = "nomeCompleto", direction = DESC) Pageable pageable){
+    public ResponseEntity<Page<DadosListagemUsuario>> listar(@ParameterObject @PageableDefault(size = 20,sort = "nomeCompleto", direction = DESC) Pageable pageable){
         return ResponseEntity.ok(consultarUsuarioUseCase.listarUsuarios(pageable));
     }
 

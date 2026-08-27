@@ -1,11 +1,13 @@
 package br.com.thiago.cinegamingapi.domain.filme.controller;
 
-import br.com.thiago.cinegamingapi.domain.filme.*;
+import br.com.thiago.cinegamingapi.domain.filme.CategoriaFilme;
 import br.com.thiago.cinegamingapi.domain.filme.dto.DadosAtualizaFilme;
 import br.com.thiago.cinegamingapi.domain.filme.dto.DadosCadastroFilme;
 import br.com.thiago.cinegamingapi.domain.filme.dto.DadosListagemFilme;
 import br.com.thiago.cinegamingapi.domain.filme.usecase.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+@Tag(name = "Filmes",description = "Endpoints para gerenciamento de filmes.")
 @RestController
 @RequestMapping("/filme")
 public class FilmeController {
@@ -41,20 +44,20 @@ public class FilmeController {
 
 
     @GetMapping
-    public ResponseEntity<Page<DadosListagemFilme>> listarfilmes(@PageableDefault(sort = "titulo") Pageable pageable){
+    public ResponseEntity<Page<DadosListagemFilme>> listarfilmes(@ParameterObject @PageableDefault(sort = "titulo") Pageable pageable){
         var filmes = consultarFilmeUseCase.listarFilmes(pageable);
         return ResponseEntity.ok(filmes);
     }
 
 
     @GetMapping("/categoria/{categoria}")
-    public ResponseEntity<Page<DadosListagemFilme>> listarPorCategoria(@PathVariable CategoriaFilme categoria, @PageableDefault(sort = "titulo") Pageable pageable){
+    public ResponseEntity<Page<DadosListagemFilme>> listarPorCategoria(@PathVariable CategoriaFilme categoria,@ParameterObject @PageableDefault(sort = "titulo") Pageable pageable){
         var filmes = consultarFilmeUseCase.listarFilmesPorCategoria(categoria,pageable);
         return ResponseEntity.ok(filmes);
     }
 
     @GetMapping("/titulo/{titulo}")
-    public ResponseEntity<Page<DadosListagemFilme>> buscaPorTitulo(@PathVariable String titulo,@PageableDefault(sort = "titulo") Pageable pageable){
+    public ResponseEntity<Page<DadosListagemFilme>> buscaPorTitulo(@PathVariable String titulo,@ParameterObject @PageableDefault(sort = "titulo") Pageable pageable){
         var filme =consultarFilmeUseCase.buscaPorTitulo(titulo,pageable);
         return ResponseEntity.ok(filme);
     }
